@@ -12,4 +12,3 @@ def area_rectangle(a: int, b: int) -> int | float:
 
 
 print(area_rectangle(8, 15))
-

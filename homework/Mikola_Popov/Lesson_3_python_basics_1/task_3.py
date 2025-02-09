@@ -5,6 +5,7 @@ def arithmetic_mean(a: list) -> int:
     res = sum(a) // len(a)
     return res
 
+
 print(arithmetic_mean([2, 4, 6]))
 
 
@@ -16,5 +17,6 @@ def geometric_mean(a: list) -> int:
     else:
         res = n ** (1 / len(a))
     return round(res)
+
 
 print(geometric_mean([2, 4, 8]))
