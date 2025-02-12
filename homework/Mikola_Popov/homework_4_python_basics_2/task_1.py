@@ -19,7 +19,7 @@ print(my_dict["list"])
 my_dict["list"].pop(1)
 print(my_dict["list"])
 # dict
-my_dict["dict"]["i am a tuple"] = (1, 5,)
+my_dict["dict"][("i am a tuple",)] = (1, 5,)
 print(my_dict["dict"])
 my_dict["dict"]["list"].pop(2)
 print(my_dict["dict"]["list"])
