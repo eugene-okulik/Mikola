@@ -1,7 +1,15 @@
-return_result_one = "результат операции: 42"
-return_result_two = "результат операции: 514"
-return_result_three = "результат операции: 9"
+"результат операции: 42"
+"результат операции: 514"
+"результат операции: 9"
 
-print(int(return_result_one[return_result_one.index("42"):]) + 10)
-print(int(return_result_two[return_result_two.index("514"):]) + 10)
-print(int(return_result_three[return_result_three.index("9"):]) + 10)
+
+result_operation = input("Please enter any of the lines listed above: ")
+num = ""
+for number in result_operation:
+    if number in "1234567890":
+        num += number
+    else:
+        number = number
+if num in result_operation:
+    result_num = result_operation[result_operation.index(num):].strip('"')
+    print(int(result_num) + 10)
