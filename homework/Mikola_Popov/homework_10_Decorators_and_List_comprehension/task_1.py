@@ -9,8 +9,8 @@ def add_decorator(func_action):
         func_action(*args)
         finish_time = datetime.datetime.now()
         t = finish_time - start_time
-        print('finished')
-        print(f'Time execute {t} second')
+        print("finished")
+        print(f"Time execute {t} second")
 
     return inner_func
 
@@ -38,7 +38,7 @@ def func_3():
 
 
 func_1()
-print(20 * '*')
+print(20 * "*")
 func_2(1000)
-print(20 * '*')
+print(20 * "*")
 func_3()
