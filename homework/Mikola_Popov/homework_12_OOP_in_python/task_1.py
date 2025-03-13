@@ -1,6 +1,3 @@
-import collections
-
-
 class Flower:
     stem = True  # ствол
     petals = True  # лепестки
@@ -8,7 +5,10 @@ class Flower:
     stamen = True  # тычинка
     pestle = True  # пестик
 
-    def __init__(self, color_petals, length_stem, number_of_petals, flower_name, day_of_live):
+    def __init__(
+        self, color_petals, length_stem,
+            number_of_petals, flower_name, day_of_live
+    ):
         self.flower_name = flower_name
         self.color_petals = color_petals  # цвет лепестков
         self.length_stem = length_stem  # длина ствола
@@ -16,27 +16,42 @@ class Flower:
         self.day_of_live = day_of_live
 
     def __str__(self):
-        return f'{self.flower_name}, {self.color_petals}'
+        return f"{self.flower_name}, {self.color_petals}"
 
 
 class Tulip(Flower):
-
-    def __init__(self, color_petals, length_stem, number_of_petals, flower_name, time_of_live):
-        super().__init__(color_petals, length_stem, number_of_petals, flower_name, time_of_live)
+    def __init__(
+        self, color_petals, length_stem, number_of_petals,
+        flower_name, time_of_live
+    ):
+        super().__init__(
+            color_petals, length_stem,
+            number_of_petals, flower_name, time_of_live
+        )
         # self.cost_of_one_flower_tulip = 4.50
 
 
 class Rose(Flower):
-
-    def __init__(self, color_petals, length_stem, number_of_petals, flower_name, time_of_live):
-        super().__init__(color_petals, length_stem, number_of_petals, flower_name, time_of_live)
+    def __init__(
+        self, color_petals, length_stem,
+        number_of_petals, flower_name, time_of_live
+    ):
+        super().__init__(
+            color_petals, length_stem,
+            number_of_petals, flower_name, time_of_live
+        )
         # self.cost_of_one_flower_rose = 4.0
 
 
 class Chamomile(Flower):
-
-    def __init__(self, color_petals, length_stem, number_of_petals, flower_name, time_of_live):
-        super().__init__(color_petals, length_stem, number_of_petals, flower_name, time_of_live)
+    def __init__(
+        self, color_petals, length_stem,
+        number_of_petals, flower_name, time_of_live
+    ):
+        super().__init__(
+            color_petals, length_stem,
+            number_of_petals, flower_name, time_of_live
+        )
         # self.cost_of_one_flower_tulip = 1.0
 
 
@@ -65,18 +80,24 @@ class Bouquet:
     def sort_by_length_stem(self):
         sort_by = []
         for length in self.lst_flowers:
-            sort_by.append(length.length_stem + ': ' + length.flower_name)
+            sort_by.append(length.length_stem + ": " + length.flower_name)
         print(*sorted(sort_by), sep="\n")
 
     def sort_by_price(self):
         sorted_lst = {}
         for key1 in self.bouguet:
             if isinstance(key1, Rose):
-                sorted_lst[key1.flower_name] = (self.cost_of_one_flower_rose * self.bouguet[key1])
+                sorted_lst[key1.flower_name] = (
+                    self.cost_of_one_flower_rose * self.bouguet[key1]
+                )
             if isinstance(key1, Chamomile):
-                sorted_lst[key1.flower_name] = (self.cost_of_one_flower_chamomile * self.bouguet[key1])
+                sorted_lst[key1.flower_name] = (
+                    self.cost_of_one_flower_chamomile * self.bouguet[key1]
+                )
             if isinstance(key1, Tulip):
-                sorted_lst[key1.flower_name] = (self.cost_of_one_flower_tulip * self.bouguet[key1])
+                sorted_lst[key1.flower_name] = (
+                    self.cost_of_one_flower_tulip * self.bouguet[key1]
+                )
         for key, value in sorted_lst.items():
             print(f"{key}: {value} руб")
 
@@ -95,7 +116,7 @@ class Bouquet:
                 elif flower.flower_name == "Тюльпан":
                     day_live += flower.day_of_live
                     count += 1
-        return f'Средняя продолжительность жизни букета - {day_live // count}'
+        return f"Средняя продолжительность жизни букета - {day_live // count}"
 
     # Собираем букет, сохраняя его содержимое в словарь.
     def collect_bouguet(self, flower, count):
@@ -117,14 +138,14 @@ class Bouquet:
                 res.append(value * self.cost_of_one_flower_rose)
             elif isinstance(key, Chamomile):
                 res.append(value * self.cost_of_one_flower_chamomile)
-        print(f'Сумма вашего букета состовляет: {sum(res)} бел/руб.')
+        print(f"Сумма вашего букета состовляет: {sum(res)} бел/руб.")
 
     def search_by_parameters(self):
         print("Поиск по времени увядания: - 'Имя цветка'")
         param = input("Name flower: ")
         for flower in self.lst_flowers:
             if flower.flower_name == param:
-                return f'{flower.day_of_live} дней'
+                return f"{flower.day_of_live} дней"
         return "Данных о цветке нет!!!"
 
 

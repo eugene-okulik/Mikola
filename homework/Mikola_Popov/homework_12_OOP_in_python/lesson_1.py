@@ -2,7 +2,6 @@ import json
 
 
 class CountryData:
-
     def __init__(self, file):
         self.__file = file
         self.__data = self.read_file()
@@ -12,7 +11,7 @@ class CountryData:
         self._comfort = self.__is_comfort()
 
     def read_file(self):
-        with open(self.__file, 'r+') as file:
+        with open(self.__file, "r+") as file:
             for line in file:
                 file_data = json.loads(line)
         return file_data
@@ -29,14 +28,13 @@ class CountryData:
         for i in self.__keys_data:
             if isinstance(self.__data[i], int):
                 if self.__data[i] >= 25:
-                    return f'{self.__data[i]} - Yes comfortable'
+                    return f"{self.__data[i]} - Yes comfortable"
                 elif self.__data[i] < 25:
-                    return f'{self.__data[i]} Not comfortable!!!'
+                    return f"{self.__data[i]} Not comfortable!!!"
 
     @property
     def data(self):
         return self.__data
-
 
     @property
     def comfort(self):
@@ -47,7 +45,7 @@ class CountryData:
         self._comfort = value
 
     def __str__(self):
-        return f'File {self.__file} with data {self.__data}'
+        return f"File {self.__file} with data {self.__data}"
 
 
 class CountryDataWithTemp(CountryData):
@@ -56,13 +54,13 @@ class CountryDataWithTemp(CountryData):
         self.min_temp = self.__data[self.__keys_data[2]]
 
 
-data1 = CountryData('data1.txt')
+data1 = CountryData("data1.txt")
 print(data1)
 data1.display_info()
-data2 = CountryData('data2.txt')
+data2 = CountryData("data2.txt")
 data2.display_info()
 print(data2.comfort)
-data3 = CountryData('data3.txt')
+data3 = CountryData("data3.txt")
 print(data3.data)
 data3.display_info()
 print(data3.comfort)
