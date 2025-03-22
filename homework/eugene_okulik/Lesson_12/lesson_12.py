@@ -39,7 +39,7 @@ class CountryData:
         return self.__avg_temp > 25
 
 
-data1 = CountryData('data1.txt')
+data1 = CountryData('../../Mikola_Popov/homework_12_OOP_in_python/data1.txt')
 data1.comfort = False
 print(data1.comfort)
 # data1.data = 'skdfjhskdjf'
@@ -48,7 +48,7 @@ print(data1.data)
 print(data1.data)
 print(data1.country)
 # print(data1.avg_temp)
-data2 = CountryData('data2.txt')
+data2 = CountryData('../../Mikola_Popov/homework_12_OOP_in_python/data2.txt')
 print(data2.country)
 data1.__avg_temp = 2342342
 print(data1.avg_temp)
