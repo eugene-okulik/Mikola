@@ -50,7 +50,8 @@ class Rose(Flower):
 class Chamomile(Flower):
     def __init__(
         self, color_petals, length_stem,
-        number_of_petals, flower_name, time_of_live, cost_of_one_flower_chamomile
+        number_of_petals, flower_name, time_of_live,
+        cost_of_one_flower_chamomile
     ):
         super().__init__(
             color_petals, length_stem,
@@ -60,9 +61,6 @@ class Chamomile(Flower):
 
 
 class Bouquet:
-    #cost_of_one_flower_tulip
-    #cost_of_one_flower_rose
-    #cost_of_one_flower_chamomile
     cost_rose = 0
     cost_tulip = 0
     cost_chamomile = 0
@@ -88,7 +86,6 @@ class Bouquet:
         for name in self.lst_flowers:
             print(name.flower_name)
 
-
     def sort_by_color(self):
         lst_color = []
         for color in self.lst_flowers:
@@ -103,7 +100,8 @@ class Bouquet:
             sort_by[int(length.length_stem[:-2])] = length.flower_name
         if max_min == 'max':
             print("Сортировка от большего к меньшему: ")
-            sort_by = collections.OrderedDict(sorted(sort_by.items(), reverse=True))
+            sort_by = collections.OrderedDict(sorted(sort_by.items(),
+                                                     reverse=True))
             for key, item in sort_by.items():
                 print(f'{item} - {key}см')
         elif max_min == 'min':
@@ -113,7 +111,6 @@ class Bouquet:
                 print(f'{item} - {key}см')
         else:
             print("Ничего небыло найдено!!!")
-
 
     def sort_by_price(self):
         sorted_lst = {}
@@ -148,7 +145,8 @@ class Bouquet:
                 elif flower.flower_name == "Тюльпан":
                     day_live += flower.day_of_live
                     count += 1
-        return f"Средняя продолжительность жизни букета в днях:  {day_live // count}"
+        return (f"Средняя продолжительность жизни букета в днях:"
+                f"  {day_live // count}")
 
     # Собираем букет, сохраняя его содержимое в словарь.
     def collect_bouguet(self, flower, count):
@@ -191,8 +189,6 @@ class Bouquet:
                 result.append(flower.flower_name)
         for name in result:
             print(f"------{name}------")
-
-
 
 
 flower_tulip = Tulip("Жёлтый", "25см", "6", "Тюльпан", 4, 4.5)
