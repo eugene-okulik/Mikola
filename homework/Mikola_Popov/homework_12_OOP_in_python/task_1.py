@@ -10,13 +10,14 @@ class Flower:
 
     def __init__(
         self, color_petals, length_stem,
-            number_of_petals, flower_name, day_of_live
+            number_of_petals, flower_name, day_of_live, price
     ):
         self.flower_name = flower_name
         self.color_petals = color_petals  # цвет лепестков
         self.length_stem = length_stem  # длина ствола
         self.number_of_petals = number_of_petals  # количество лепестков
         self.day_of_live = day_of_live
+        self.price = price
 
     def __str__(self):
         return f"{self.flower_name}, {self.color_petals}"
@@ -26,44 +27,37 @@ class Tulip(Flower):
 
     def __init__(
         self, color_petals, length_stem, number_of_petals,
-        flower_name, time_of_live, cost_of_one_flower_tulip
+        flower_name, time_of_live, price
     ):
         super().__init__(
             color_petals, length_stem,
-            number_of_petals, flower_name, time_of_live
+            number_of_petals, flower_name, time_of_live, price
         )
-        self.cost_of_one_flower_tulip = cost_of_one_flower_tulip
 
 
 class Rose(Flower):
     def __init__(
         self, color_petals, length_stem,
-        number_of_petals, flower_name, time_of_live, cost_of_one_flower_rose
+        number_of_petals, flower_name, time_of_live, price
     ):
         super().__init__(
             color_petals, length_stem,
-            number_of_petals, flower_name, time_of_live
+            number_of_petals, flower_name, time_of_live, price
         )
-        self.cost_of_one_flower_rose = cost_of_one_flower_rose
 
 
 class Chamomile(Flower):
     def __init__(
         self, color_petals, length_stem,
-        number_of_petals, flower_name, time_of_live,
-        cost_of_one_flower_chamomile
+        number_of_petals, flower_name, time_of_live, price
     ):
         super().__init__(
             color_petals, length_stem,
-            number_of_petals, flower_name, time_of_live
+            number_of_petals, flower_name, time_of_live, price
         )
-        self.cost_of_one_flower_chamomile = cost_of_one_flower_chamomile
 
 
 class Bouquet:
-    cost_rose = 0
-    cost_tulip = 0
-    cost_chamomile = 0
 
     def __init__(self):
 
@@ -72,15 +66,6 @@ class Bouquet:
 
     def add_flowers(self, name):
         self.lst_flowers.append(name)
-
-    def iter_cost_flower(self):
-        for flower in self.lst_flowers:
-            if isinstance(flower, Rose):
-                self.cost_rose += flower.cost_of_one_flower_rose
-            elif isinstance(flower, Tulip):
-                self.cost_tulip += flower.cost_of_one_flower_tulip
-            elif isinstance(flower, Chamomile):
-                self.cost_chamomile += flower.cost_of_one_flower_chamomile
 
     def display_flowers(self):
         for name in self.lst_flowers:
@@ -94,38 +79,30 @@ class Bouquet:
 
     def sort_by_length_stem(self):
         print("Сортировка цветов по длине стебля")
-        max_min = input("Введите пожалуйста - max или min: ")
         sort_by = {}
         for length in self.lst_flowers:
             sort_by[int(length.length_stem[:-2])] = length.flower_name
-        if max_min == 'max':
-            print("Сортировка от большего к меньшему: ")
             sort_by = collections.OrderedDict(sorted(sort_by.items(),
                                                      reverse=True))
-            for key, item in sort_by.items():
-                print(f'{item} - {key}см')
-        elif max_min == 'min':
-            print("Сортировка от меньшего к большему: ")
-            sort_by = collections.OrderedDict(sorted(sort_by.items()))
-            for key, item in sort_by.items():
-                print(f'{item} - {key}см')
-        else:
-            print("Ничего небыло найдено!!!")
+        for key, item in sort_by.items():
+            print(f'{item} - {key}см')
 
     def sort_by_price(self):
         sorted_lst = {}
+        for key, value in self.bouguet.items():
+            print(key, value)
         for key1 in self.bouguet:
             if isinstance(key1, Rose):
                 sorted_lst[key1.flower_name] = (
-                    self.cost_rose * self.bouguet[key1]
+                    key1.price * self.bouguet[key1]
                 )
             if isinstance(key1, Chamomile):
                 sorted_lst[key1.flower_name] = (
-                    self.cost_chamomile * self.bouguet[key1]
+                    key1.price * self.bouguet[key1]
                 )
             if isinstance(key1, Tulip):
                 sorted_lst[key1.flower_name] = (
-                    self.cost_tulip * self.bouguet[key1]
+                    key1.price * self.bouguet[key1]
                 )
         for key, value in sorted_lst.items():
             print(f"{key}: {value} руб")
@@ -160,24 +137,14 @@ class Bouquet:
 
     # Подсчитываем стоимость букета, по стоимости каждого цветка.
     def calc_cost_of_the_bouguets(self):
-        rose = 0
-        tulip = 0
-        chamomile = 0
-        for flower in self.lst_flowers:
-            if isinstance(flower, Rose):
-                rose += flower.cost_of_one_flower_rose
-            elif isinstance(flower, Tulip):
-                tulip += flower.cost_of_one_flower_tulip
-            elif isinstance(flower, Chamomile):
-                chamomile += flower.cost_of_one_flower_chamomile
         res = []
         for key, value in self.bouguet.items():
             if isinstance(key, Tulip):
-                res.append(value * tulip)
+                res.append(value * key.price)
             elif isinstance(key, Rose):
-                res.append(value * rose)
+                res.append(value * key.price)
             elif isinstance(key, Chamomile):
-                res.append(value * chamomile)
+                res.append(value * key.price)
         print(f"Сумма вашего букета состовляет: {sum(res)} бел/руб.")
 
     def search_by_parameters(self):
@@ -199,7 +166,6 @@ bouguets = Bouquet()
 bouguets.add_flowers(flower_rose)
 bouguets.add_flowers(flower_chamomile)
 bouguets.add_flowers(flower_tulip)
-bouguets.iter_cost_flower()
 bouguets.display_flowers()
 
 bouguets.collect_bouguet(flower_tulip, 5)
