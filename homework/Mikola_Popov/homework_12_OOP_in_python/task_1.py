@@ -1,6 +1,3 @@
-import collections
-
-
 class Flower:
     stem = True  # ствол
     petals = True  # лепестки
@@ -102,20 +99,11 @@ class Bouquet:
             print(name.flower_name)
 
     def sort_by_color(self):
-        lst_color = []
-        for color in self.lst_flowers:
-            lst_color.append(color.color_petals + "-" + color.flower_name)
-        return sorted(lst_color)
+        return sorted(self.lst_flowers, key=lambda flower: flower.color_petals)
 
     def sort_by_length_stem(self):
         print("Сортировка цветов по длине стебля")
-        sort_by = {}
-        for length in self.lst_flowers:
-            sort_by[int(length.length_stem[:-2])] = length.flower_name
-            sort_by = collections.OrderedDict(
-                sorted(sort_by.items(), reverse=True))
-        for key, item in sort_by.items():
-            print(f"{item} - {key}см")
+        return sorted(self.lst_flowers, key=lambda flower: flower.length_stem)
 
     def sort_by_price(self):
         sorted_lst = []
@@ -159,9 +147,8 @@ class Bouquet:
         result = []
         for flower in self.lst_flowers:
             if flower.day_of_live == param:
-                result.append(flower.flower_name)
-        for name in result:
-            print(f"------{name}------")
+                result.append(flower)
+        return result
 
 
 flower_tulip = Tulip("Жёлтый", "25см", "6", "Тюльпан", 4, 4.5)
@@ -186,6 +173,6 @@ bouguets.sort_by_price()
 print(20 * "*")
 print(bouguets.sort_by_color())
 print(20 * "*")
-bouguets.sort_by_length_stem()
+print(bouguets.sort_by_length_stem())
 print(20 * "*")
-bouguets.search_by_parameters()
+print(bouguets.search_by_parameters())
