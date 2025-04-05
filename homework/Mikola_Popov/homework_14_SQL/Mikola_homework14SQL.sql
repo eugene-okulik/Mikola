@@ -1,10 +1,12 @@
-INSERT INTO students (name, second_name, group_id) VALUES ('Mikalau', 'Papov', 4905);
+INSERT INTO students (name, second_name, group_id) VALUES ('Mikalau', 'Papov', NULL);
 
 INSERT INTO books (title, taken_by_student_id) VALUES ('The plan to defeat Thanos', 20076);
 
 INSERT INTO books (title, taken_by_student_id)  VALUES ('How to shave a wolverine and stay alive', 20076);
 
 INSERT INTO `groups` (title, start_date, end_date) VALUES ('Charles Xovier Group', 'Marth 25', 'Jul 25');
+
+UPDATE students SET group_id=4908 WHERE id = 20076;
 
 INSERT INTO subjets (title) VALUES ('psychology');
 
