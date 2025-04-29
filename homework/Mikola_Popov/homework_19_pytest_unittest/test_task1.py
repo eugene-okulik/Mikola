@@ -35,12 +35,7 @@ def create_new_object_id():
     object_id = response['id']
     print(f"Created new object {object_id}")
     yield object_id
-    delete_object(object_id)
-    print("Object deleted")
-
-
-def delete_object(id):
-    requests.delete(f"http://167.172.172.115:52353/object/{id}")
+    test_delete_object(object_id)
 
 
 def test_all_objects(start_completed_func, before_after_func):
@@ -78,6 +73,13 @@ def test_add_object(color, size, name, before_after_func):
         headers=headers)
     print(response.json())
     assert response.status_code == 200
+
+
+def test_delete_object(create_new_object_id):
+    requests.delete(
+        f"http://167.172.172.115:52353/object/{create_new_object_id}"
+    )
+    print("Object deleted")
 
 
 def test_put_a_object(create_new_object_id, before_after_func):
