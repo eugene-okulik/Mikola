@@ -18,7 +18,7 @@ def before_after_func():
 
 
 @pytest.fixture()
-def create_new_post_id():
+def create_new_object_id():
     body = {
         "data": {
             "color": "Blue",
@@ -32,20 +32,24 @@ def create_new_post_id():
     response = requests.post('http://167.172.172.115:52353/object',
                              json=body,
                              headers=headers).json()
-    post_id = response['id']
-    print(f"Created new object {post_id}")
-    yield post_id
-    requests.delete(f"http://167.172.172.115:52353/object/{post_id}")
-    print("Post deleted")
+    object_id = response['id']
+    print(f"Created new object {object_id}")
+    yield object_id
+    delete_object(object_id)
+    print("Object deleted")
 
 
-def test_all_posts(start_completed_func, before_after_func):
+def delete_object(id):
+    requests.delete(f"http://167.172.172.115:52353/object/{id}")
+
+
+def test_all_objects(start_completed_func, before_after_func):
     response = requests.get('http://167.172.172.115:52353/object')
-    return response
+    assert response.status_code == 200
 
 
 @pytest.mark.medium
-def test_one_post(before_after_func):
+def test_one_object(before_after_func):
     response = requests.get('http://167.172.172.115:52353/object/1').json()
     print(response)
 
@@ -57,7 +61,7 @@ def test_one_post(before_after_func):
                              ("Green", "medium", "Fourth object"),
                              ("White", "small", "Fifth object"),
                          ])
-def test_add_post(color, size, name, before_after_func):
+def test_add_object(color, size, name, before_after_func):
     body = {
         "data": {
             "color": color,
@@ -76,7 +80,7 @@ def test_add_post(color, size, name, before_after_func):
     assert response.status_code == 200
 
 
-def test_put_a_post(create_new_post_id, before_after_func):
+def test_put_a_object(create_new_object_id, before_after_func):
     body = {
         "data": {
             "color": "black_and_white",
@@ -88,13 +92,13 @@ def test_put_a_post(create_new_post_id, before_after_func):
         "Content-type": "application/json; charset=UTF-8",
     }
     response = requests.put(
-        f'http://167.172.172.115:52353/object/{create_new_post_id}',
+        f'http://167.172.172.115:52353/object/{create_new_object_id}',
         json=body,
         headers=headers)
     assert response.status_code == 200
 
 
-def test_patch_a_post(create_new_post_id, before_after_func):
+def test_patch_a_post(create_new_object_id, before_after_func):
     body = {
         "data": {
             "color": "black_and_white",
@@ -106,7 +110,7 @@ def test_patch_a_post(create_new_post_id, before_after_func):
         "Content-type": "application/json; charset=UTF-8",
     }
     response = requests.patch(
-        f'http://167.172.172.115:52353/object/{create_new_post_id}',
+        f'http://167.172.172.115:52353/object/{create_new_object_id}',
         json=body,
         headers=headers)
     assert response.status_code == 200
