@@ -12,7 +12,7 @@ from test_api_mpopov.endpoints.putch_a_object import PatchObject
 def start_completed_func():
     print("Start testing")
     yield
-    print(30 * '-')
+    print(30 * "-")
     print("Testing completed")
 
 

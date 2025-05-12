@@ -4,11 +4,10 @@ import requests
 
 
 class PatchObject(Endpoint):
-
-    @allure.step('Getting an object based on test data')
+    @allure.step("Getting an object based on test data")
     def patch_object(self, body, object_id):
-        self.response = requests.patch(f'{self.url}/{object_id}',
-                                       json=body,
-                                       headers=self.headers)
+        self.response = requests.patch(
+            f"{self.url}/{object_id}", json=body, headers=self.headers
+        )
         self.json = self.response.json()
         return self.response
