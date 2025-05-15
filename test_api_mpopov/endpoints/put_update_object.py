@@ -13,6 +13,6 @@ class PutObject(Endpoint):
         self.json = self.response.json()
         return self.response
 
-    @allure.step("Checking to get the status code objects 200")
+    @allure.step("Checking to get the name 'color' object")
     def check_correct_data(self, title):
-        return self.json["data"]["color"] == title
+        assert self.json["data"]["color"] == title

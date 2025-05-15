@@ -3,16 +3,16 @@ import allure
 import requests
 
 
+url = "http://167.172.172.115:52353/object"
+
+
 class DeleteObjects(Endpoint):
+    @staticmethod
     @allure.step("Deleting an object by its ID")
-    def delete_objects(self, object_id):
-        self.response = requests.delete(f"{self.url}/{object_id}")
-        return self.response
+    def delete_objects(obj_id):
+        requests.delete(f"{url}/{obj_id}")
 
+    @staticmethod
     @allure.step("Text print about deletion")
-    def print_text_delete(self):
+    def print_text_delete():
         print("Object deleted")
-
-    @allure.step("Print")
-    def print_status_code(self):
-        print(self.response.status_code)

@@ -1,11 +1,38 @@
 import pytest
+import allure
+import requests
 from test_api_mpopov.endpoints.create_objects import CreateThreeObjects
-from test_api_mpopov.endpoints.create_new_one_object import CreateOneObject
-from test_api_mpopov.endpoints.update_object import PutObject
-from test_api_mpopov.endpoints.get_all_the_objects import GetAllObjects
-from test_api_mpopov.endpoints.get_one_the_object import GetOneObject
+from test_api_mpopov.endpoints.put_update_object import PutObject
+from test_api_mpopov.endpoints.get_full_all_objects import GetAllObjects
+from test_api_mpopov.endpoints.get_only_one_object import GetOneObject
 from test_api_mpopov.endpoints.delete_objects import DeleteObjects
 from test_api_mpopov.endpoints.putch_a_object import PatchObject
+
+
+headers = {
+    "Content-type": "application/json",
+}
+url = "http://167.172.172.115:52353/object"
+BODY = {
+    "data": {"color": "Blue", "size": "very big"},
+    "name": "new project",
+}
+
+
+@allure.step("Create one object")
+@pytest.fixture()
+def new_object_id():
+    response = requests.post(url, json=BODY, headers=headers)
+    allure.attach(
+        response.text,
+        name="Response body",
+        attachment_type=allure.attachment_type.JSON,
+    )
+    object_id = response.json()["id"]
+    print("Create new object")
+    yield object_id
+    DeleteObjects.delete_objects(object_id)
+    DeleteObjects.print_text_delete()
 
 
 @pytest.fixture()
@@ -41,11 +68,6 @@ def delete():
 @pytest.fixture()
 def create_add_object():
     return CreateThreeObjects()
-
-
-@pytest.fixture()
-def create_new_object_id():
-    return CreateOneObject()
 
 
 @pytest.fixture()

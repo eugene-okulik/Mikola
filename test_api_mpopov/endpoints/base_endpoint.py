@@ -11,9 +11,9 @@ class Endpoint:
     object_id = None
 
     @allure.step("Checking object to status code 200")
-    def check_code_status(self):
+    def check_code_status_is_200(self):
         assert self.response.status_code == 200
 
     @allure.step("Get object data output")
-    def print_result_objects(self):
-        print(self.json)
+    def print_result_objects(self, obj_id):
+        print(obj_id)
