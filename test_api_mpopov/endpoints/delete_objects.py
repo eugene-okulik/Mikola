@@ -7,7 +7,6 @@ url = "http://167.172.172.115:52353/object"
 
 
 class DeleteObjects(Endpoint):
-
     @allure.step("Deleting an object by its ID")
     def delete_objects(self, obj_id):
         self.response = requests.delete(f"{url}/{obj_id}")
@@ -24,5 +23,4 @@ class DeleteObjects(Endpoint):
     @allure.step("Status code")
     def correspondence(self):
         assert self.response.reason == "OK"
-        print(f'Corresponding to the status code 200: {self.response.reason}')
-
+        print(f"Corresponding to the status code 200: {self.response.reason}")

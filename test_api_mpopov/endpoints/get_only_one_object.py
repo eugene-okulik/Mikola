@@ -14,7 +14,6 @@ class GetOneObject(Endpoint):
         )
         self.object_id = self.response.json()["id"]
 
-
     @allure.step("Check object id found")
     def check_id_object(self, obj_id):
         assert self.object_id == obj_id

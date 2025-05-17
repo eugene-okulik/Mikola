@@ -35,7 +35,6 @@ def new_object_id(delete):
     delete.print_text_delete()
 
 
-
 @pytest.fixture()
 def start_completed_func():
     print("Start testing")
