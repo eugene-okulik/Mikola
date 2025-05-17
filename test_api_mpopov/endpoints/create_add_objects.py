@@ -3,9 +3,10 @@ import allure
 from test_api_mpopov.endpoints.base_endpoint import Endpoint
 
 
-class CreateThreeObjects(Endpoint):
+class AddObjects(Endpoint):
+
     @allure.step("Create three objects")
-    def create_new_objects(self, body):
+    def create_add_objects(self, body):
         self.response = requests.post(self.url,
                                       json=body,
                                       headers=self.headers)

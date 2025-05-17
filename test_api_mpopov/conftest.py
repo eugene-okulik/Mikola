@@ -1,7 +1,7 @@
 import pytest
 import allure
 import requests
-from test_api_mpopov.endpoints.create_objects import CreateThreeObjects
+from test_api_mpopov.endpoints.create_add_objects import AddObjects
 from test_api_mpopov.endpoints.put_update_object import PutObject
 from test_api_mpopov.endpoints.get_full_all_objects import GetAllObjects
 from test_api_mpopov.endpoints.get_only_one_object import GetOneObject
@@ -21,7 +21,7 @@ BODY = {
 
 @allure.step("Create one object")
 @pytest.fixture()
-def new_object_id():
+def new_object_id(delete):
     response = requests.post(url, json=BODY, headers=headers)
     allure.attach(
         response.text,
@@ -31,8 +31,9 @@ def new_object_id():
     object_id = response.json()["id"]
     print("Create new object")
     yield object_id
-    DeleteObjects.delete_objects(object_id)
-    DeleteObjects.print_text_delete()
+    delete.delete_objects(object_id)
+    delete.print_text_delete()
+
 
 
 @pytest.fixture()
@@ -66,8 +67,8 @@ def delete():
 
 
 @pytest.fixture()
-def create_add_object():
-    return CreateThreeObjects()
+def create_additional_objects():
+    return AddObjects()
 
 
 @pytest.fixture()

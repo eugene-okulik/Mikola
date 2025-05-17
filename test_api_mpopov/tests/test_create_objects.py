@@ -20,21 +20,24 @@ def test_get_one_object(one_object, new_object_id, before_after_func):
         ("White", "small", "Fifth object"),
     ],
 )
-def test_add_object(color, size, name, create_add_object, before_after_func):
+def test_add_object(color, size, name, create_additional_objects, before_after_func):
     with allure.step("Preparation of test data"):
         body = {
             "data": {"color": color, "size": size},
             "name": name,
         }
-    create_add_object.create_new_objects(body)
-    create_add_object.print_result_objects(
-        create_add_object.create_new_objects(body)
+    create_additional_objects.create_add_objects(body)
+    create_additional_objects.print_result_objects(
+        create_additional_objects.create_add_objects(body)
     )
-    create_add_object.check_body_name(body["name"])
+    create_additional_objects.check_body_name(body["name"])
 
 
 def test_delete_object(delete, new_object_id):
     delete.delete_objects(new_object_id)
+    delete.print_text_delete()
+    delete.check_response_text(f"Object with id {new_object_id} successfully deleted")
+    delete.correspondence()
 
 
 def test_put_a_object(new_object_id, update_object, before_after_func):
