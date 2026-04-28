@@ -1,4 +1,3 @@
-import time
 from locators import loc_state, loc_city
 
 from playwright.sync_api import Page, expect
@@ -25,7 +24,7 @@ def test_filling_form(page: Page):
     page.get_by_label("Sports").click()
     page.set_input_files(
         '//input[@label="Select picture"]',
-        "C:\\Users\\Nikolai\\Desktop\\zhivotnye_kot_13379.jpg",
+        "homework/Mikola_Popov/homework_28_Playwright/zhivotnye_kot_13379.jpg",
     )
     current_address = page.get_by_placeholder("Current Address")
     current_address.press_sequentially(data, delay=100)
@@ -34,6 +33,5 @@ def test_filling_form(page: Page):
     page.locator(loc_city).click()
     page.locator("//div[@id='react-select-4-option-2']").click()
     page.get_by_role("button", name="Submit").click()
-    time.sleep(2)
     text_new_page = page.locator("//div[@id='example-modal-sizes-title-lg']")
     expect(text_new_page).to_contain_text("Thanks for submitting the form")

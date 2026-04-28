@@ -9,10 +9,10 @@ def test_by_role(page: Page):
     # альтернативный поиск элемента
     page.get_by_role("link", name="Form Authentication").click()
     time.sleep(1)
-    username = page.locator("input[name='username']")
+    username = page.get_by_role("textbox", name="username")
     username.fill("Nikolay")
     time.sleep(1)
-    password = page.locator("input[name='password']")
+    password = page.get_by_role("textbox", name="password")
     password.fill("80292788064np")
     time.sleep(1)
     # page.locator('button[type="submit"]').click()
